@@ -27,7 +27,7 @@ WebUI.click(findTestObject('Page_OrangeHRM/input_Password_Submit'))
 
 WebUI.click(findTestObject('Page_OrangeHRM/a_Welcome Admin'))
 
-WebUI.verifyTextPresent('ABCD', false, FailureHandling.CONTINUE_ON_FAILURE)
+not_run: WebUI.verifyTextPresent('ABCD', false, FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.verifyElementPresent(findTestObject('Page_OrangeHRM/a_Logout'), 5)
 

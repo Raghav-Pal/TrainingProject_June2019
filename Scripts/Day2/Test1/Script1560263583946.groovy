@@ -15,7 +15,7 @@ import internal.GlobalVariable as GlobalVariable
 
 WebUI.openBrowser('')
 
-WebUI.delay(7, FailureHandling.STOP_ON_FAILURE)
+not_run: WebUI.delay(7, FailureHandling.STOP_ON_FAILURE)
 
 WebUI.navigateToUrl(GlobalVariable.URL)
 
@@ -28,6 +28,8 @@ WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/input_Password_Subm
 WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Admin'))
 
 WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Leave'))
+
+WebUI.verifyTextPresent('ABCD', false)
 
 WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Recruitment'))
 
