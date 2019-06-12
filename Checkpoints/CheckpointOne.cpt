@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkpoint>
+   <description></description>
+   <name>CheckpointOne</name>
+   <tag></tag>
+   <excel-source-info>
+      <is-from-test-data>false</is-from-test-data>
+      <source-url>C:\Users\Administrator\Desktop\Data\dataOne.xlsx</source-url>
+      <source-type>ExcelFile</source-type>
+      <sheet-name-or-separator>Sheet1</sheet-name-or-separator>
+      <is-using-relative-path>false</is-using-relative-path>
+      <is-using-first-row-as-header>true</is-using-first-row-as-header>
+   </excel-source-info>
+   <taken-date>2019-06-11T23:03:03.507</taken-date>
+   <column-names>
+      <column-name>Name</column-name>
+      <column-name>Place</column-name>
+   </column-names>
+   <checkpoint-data><![CDATA[[
+  [
+    {
+      "value": "Tom",
+      "checked": true
+    },
+    {
+      "value": "Houston",
+      "checked": false
+    }
+  ],
+  [
+    {
+      "value": "Jack",
+      "checked": true
+    },
+    {
+      "value": "Durham",
+      "checked": false
+    }
+  ],
+  [
+    {
+      "value": "Henry",
+      "checked": true
+    },
+    {
+      "value": "Boston",
+      "checked": true
+    }
+  ]
+]]]></checkpoint-data>
+</checkpoint>
