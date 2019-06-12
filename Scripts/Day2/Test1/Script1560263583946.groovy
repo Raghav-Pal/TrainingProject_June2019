@@ -29,7 +29,7 @@ WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Admin'))
 
 WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Leave'))
 
-not_run: WebUI.verifyTextPresent('ABCD', false)
+WebUI.verifyTextPresent('ABCD', false)
 
 WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Recruitment'))
 
