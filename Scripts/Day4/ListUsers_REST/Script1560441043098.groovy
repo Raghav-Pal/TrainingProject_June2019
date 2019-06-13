@@ -13,25 +13,13 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.openBrowser('')
+response = WS.sendRequestAndVerify(findTestObject('REST/ListUsers'))
 
-not_run: WebUI.delay(7, FailureHandling.STOP_ON_FAILURE)
+WS.verifyElementPropertyValue(response, 'data[1].first_name', 'Charles')
 
-WebUI.navigateToUrl(GlobalVariable.URL)
+WS.verifyElementsCount(response, 'data', 3)
 
-WebUI.setText(findTestObject('Object Repository/Page_OrangeHRM/input_LOGIN Panel_txtUsername'), GlobalVariable.UNAME)
+WS.verifyResponseStatusCode(response, 200)
 
-WebUI.setEncryptedText(findTestObject('Object Repository/Page_OrangeHRM/input_Username_txtPassword'), GlobalVariable.PASSWORD)
-
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/input_Password_Submit'))
-
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Admin'))
-
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Leave'))
-
-not_run: WebUI.verifyTextPresent('ABCD', false)
-
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Recruitment'))
-
-WebUI.closeBrowser()
+WS.verifyResponseStatusCodeInRange(response, 100, 200)
 

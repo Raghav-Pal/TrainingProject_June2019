@@ -13,25 +13,19 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.openBrowser('')
+response = WS.sendRequest(findTestObject('REST/ListUsers'))
 
-not_run: WebUI.delay(7, FailureHandling.STOP_ON_FAILURE)
+def slurper = new groovy.json.JsonSlurper()
 
-WebUI.navigateToUrl(GlobalVariable.URL)
+def result = slurper.parseText(response.getResponseBodyContent())
 
-WebUI.setText(findTestObject('Object Repository/Page_OrangeHRM/input_LOGIN Panel_txtUsername'), GlobalVariable.UNAME)
+def value = result.data[1].first_name
 
-WebUI.setEncryptedText(findTestObject('Object Repository/Page_OrangeHRM/input_Username_txtPassword'), GlobalVariable.PASSWORD)
+println('\n Extracted value is : ' + value)
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/input_Password_Submit'))
+GlobalVariable.UNAME = value
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Admin'))
+println('\n Value for GlobalVariable UNAME now is : ' + GlobalVariable.UNAME)
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Leave'))
-
-not_run: WebUI.verifyTextPresent('ABCD', false)
-
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Recruitment'))
-
-WebUI.closeBrowser()
+WS.sendRequestAndVerify(findTestObject('REST/UpdateUser', [('username') : GlobalVariable.UNAME]))
 

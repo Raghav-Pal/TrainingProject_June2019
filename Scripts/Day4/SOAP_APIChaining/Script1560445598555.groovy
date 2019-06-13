@@ -13,25 +13,29 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.openBrowser('')
+addResult = WS.sendRequest(findTestObject('SOAP/Add'))
 
-not_run: WebUI.delay(7, FailureHandling.STOP_ON_FAILURE)
+String xml1 = addResult.responseBodyContent
 
-WebUI.navigateToUrl(GlobalVariable.URL)
+def dataValue1 = new XmlSlurper().parseText(xml1)
 
-WebUI.setText(findTestObject('Object Repository/Page_OrangeHRM/input_LOGIN Panel_txtUsername'), GlobalVariable.UNAME)
+println('\n Result for add is : ' + dataValue1)
 
-WebUI.setEncryptedText(findTestObject('Object Repository/Page_OrangeHRM/input_Username_txtPassword'), GlobalVariable.PASSWORD)
+GlobalVariable.NUM1 = dataValue1
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/input_Password_Submit'))
+println('\n Value for Global Variable NUM1 is : ' + GlobalVariable.NUM1)
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Admin'))
+subResult = WS.sendRequest(findTestObject('SOAP/Subtract'))
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Leave'))
+String xml2 = subResult.responseBodyContent
 
-not_run: WebUI.verifyTextPresent('ABCD', false)
+def dataValue2 = new XmlSlurper().parseText(xml2)
 
-WebUI.click(findTestObject('Object Repository/Page_OrangeHRM/b_Recruitment'))
+println('\n Result for sub is : ' + dataValue2)
 
-WebUI.closeBrowser()
+GlobalVariable.NUM2 = dataValue2
+
+println('\n Value for Global Variable NUM2 is : ' + GlobalVariable.NUM2)
+
+WS.sendRequestAndVerify(findTestObject('SOAP/Multiply', [('num1') : GlobalVariable.NUM1, ('num2') : GlobalVariable.NUM2]))
 
