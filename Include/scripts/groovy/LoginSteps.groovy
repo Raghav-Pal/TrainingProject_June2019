@@ -47,26 +47,34 @@ import cucumber.api.java.en.When
 
 
 class LoginSteps {
-	
-	
+
+
 	@Given('User is on login page')
 	def navigateToLoginPage(){
 		println '\n I am inside navigateToLoginPage'
+		WebUI.openBrowser('')
+		WebUI.navigateToUrl('https://opensource-demo.orangehrmlive.com/')
 	}
-	
-	@When('User enters username and password')
-	def enterCredentials(){
+
+	@When('User enters (.*) and (.*)')
+	def enterCredentials(String username, String password){
 		println '\n I am inside enterCredentials'
+		WebUI.setText(findTestObject('Page_OrangeHRM/input_LOGIN Panel_txtUsername'), username)
+		WebUI.setEncryptedText(findTestObject('Page_OrangeHRM/input_Username_txtPassword'), password)
+		
 	}
-	
+
 	@And('Clicks login button')
 	def clickLogin(){
 		println '\n I am inside clickLogin'
+		WebUI.click(findTestObject('Page_OrangeHRM/input_Password_Submit'))
+		
 	}
-	
+
 	@Then('User is navigated to home page')
 	def verifyHomePage(){
-		println 'I am inside verifyHomePage'
+		println '\n I am inside verifyHomePage'
+		WebUI.click(findTestObject('Page_OrangeHRM/b_Dashboard'))
+		WebUI.closeBrowser()
 	}
-	
 }
